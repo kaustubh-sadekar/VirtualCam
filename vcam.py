@@ -24,7 +24,7 @@ class vcam:
 		self.R = 0
 		self.sh = 0 # Shere factor
 		self.P = 0
-
+		self.KpCoeff = np.array([0,0,0,0,0,0,0,0]) # k1,k2,p1,p2,k3,k4,k5,k6
 		self.focus = 100 # Focal length of camera in mm
 		self.sx = 1 # Effective size of a pixel in mm
 		self.sy = 1 # Effective size of a pixel in mm
@@ -39,16 +39,23 @@ class vcam:
 		self.R = np.matmul(Rx, np.matmul(Ry, Rz))
 		self.K = np.array([[-self.focus/self.sx,self.sh,self.ox],[0,self.focus/self.sy,self.oy],[0,0,1]])
 		self.M1 = np.array([[1,0,0,-self.Tx],[0,1,0,-self.Ty],[0,0,1,-self.Tz]])
-
-		self.P = np.matmul(np.matmul(self.K,self.R),self.M1)
+		self.RT = np.matmul(self.R,self.M1)
 
 	def project(self,src):
 		self.update_M()
-		pts2d = np.matmul(self.P,src) # A 3X1 matrix
-		
+		pts2d = np.matmul(self.RT,src)
+
 		try:
-			x = pts2d[0,:]*1.0/(pts2d[2,:]+0.0000000001)
-			y = pts2d[1,:]*1.0/(pts2d[2,:]+0.0000000001)
+			x_1 = pts2d[0,:]*1.0/(pts2d[2,:]+0.0000000001)
+			y_1 = pts2d[1,:]*1.0/(pts2d[2,:]+0.0000000001)
+			r_2 = x_1**2 + y_1**2
+			r_4 = r_2**2
+			r_6 = r_2**3
+			K = (1+self.KpCoeff[0]*r_2+self.KpCoeff[1]*r_4+self.KpCoeff[4]*r_6)/((1+self.KpCoeff[5]*r_2+self.KpCoeff[6]*r_4+self.KpCoeff[7]*r_6))
+			x_2 = x_1*K + 2*self.KpCoeff[2]*x_1*y_1 + self.KpCoeff[3]*(r_2+2*x_1**2)
+			y_2 = y_1*K + self.KpCoeff[2]*(r_2 + 2*y_1**2) + 2*self.KpCoeff[3]*x_1*y_1
+			x = self.K[0,0]*x_2 + self.K[0,2]
+			y = self.K[1,1]*y_2 + self.K[1,2]
 		except:
 			print("Division by zero!")
 			x = pts2d[0,:]*0
@@ -63,9 +70,9 @@ class vcam:
 		self.update_M()
 
 	def set_rvec(self,alpha,beta,gamma):
-		self.alpha = alpha
-		self.beta = beta
-		self.gamma = gamma
+		self.alpha = (alpha/180.0)*np.pi
+		self.beta = (beta/180.0)*np.pi
+		self.gamma = (gamma/180.0)*np.pi
 		self.update_M()
 
 	def renderMesh(self,src):
