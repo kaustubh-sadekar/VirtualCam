@@ -2,6 +2,10 @@
 
 Virtual camera is created **only using OpenCV and numpy**. It simulates a camera where **we can control** all its parameters **intrinsic and extrinsic** to get a better understanding how each component in the **camera projection matrix** affects the final image of the object captured by the camera. It can be used to understand concepts of image formation and to understand the intrinsic and extrinsic camera parameters. An interractive GUI is also provided which simulates a virtual camera and a plane in 3D world. By changing the extrinsic parameters of the camera (rotation and translation) you can simulate how the image being formed changes.
 
+Standard books related to multi-view geometry and computer vision were refered to ensure validty of equations in the code.
+I also refered this [blog from learnopencv.com](https://www.learnopencv.com/geometry-of-image-formation/) to understand the geometry of image formation.
+
+
 ## Camera Translation
 ![Camera-Translation](xyz.gif)
 
