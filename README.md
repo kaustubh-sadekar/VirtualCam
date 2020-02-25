@@ -18,5 +18,9 @@ When you control the alpha, beta, gamma trackbars you are controlling the rotati
 
 When you control the k and p trackbars you are controlling the distortion coefficients. The computations performed in numpy also take into account the equation for lens distortions for a pin hole camera.
 
+## Camera apparent pixel size and focal lenght
+![Camera-apparent-pixel-size-and-focus](intrinsic.gif)
+
+When you control the sx and sy trackbars the apparent pixel size in x and y direction changes. As Sx increases the apparent pixel width increases making the image stretch horizontally and similarly Sy increases the apparent pixel height, making the image stretch vertically. 
 
 Basically the plane is a mesh of 3D points. We compute the camera projection matrix and thus the image coordinates corresponding to these 3D points. The projected points and the original mesh points are used to compute a map and finally a remapping function is applied on the image.
