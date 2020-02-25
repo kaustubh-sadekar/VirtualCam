@@ -123,6 +123,6 @@ class meshGen:
 
 		X = xv.reshape(-1,1)
 		Y = yv.reshape(-1,1)
-		Z = -np.sqrt((self.W*epsilon)**2 - X**2 - Y**2)
+		Z = np.sqrt((self.W*epsilon)**2 - X**2 - Y**2)
 
 		return np.concatenate(([X],[Y],[Z],[X*0+1]))[:,:,0]
