@@ -6,6 +6,16 @@ Standard books related to multi-view geometry and computer vision were refered t
 I also refered this [blog from learnopencv.com](https://www.learnopencv.com/geometry-of-image-formation/) to understand the geometry of image formation.
 
 
+## Instructions to run the GUI
+
+1. Install the virtual camera library using the following command
+```shell
+pip3 install vcam
+```
+2. Clone the repositoy
+`git clone https://github.com/kaustubh-sadekar/VirtualCam.git`
+3. Run the GUI
+
 ### Camera Translation
 ![Camera-Translation](xyz.gif)
 
@@ -29,10 +39,6 @@ When you control the sx and sy trackbars the apparent pixel size in x and y dire
 
 Basically the plane is a mesh of 3D points. We compute the camera projection matrix and thus the image coordinates corresponding to these 3D points. The projected points and the original mesh points are used to compute a map and finally a remapping function is applied on the image.
 
-## Instructions to run the GUI
-1. Clone the repositoy
-`git clone https://github.com/kaustubh-sadekar/VirtualCam.git`
-2. Run the GUI
 `python3 GUI.py`
 
 ## Code files
