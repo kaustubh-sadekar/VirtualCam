@@ -3,6 +3,20 @@ import numpy as np
 import math
 from vcam import vcam,meshGen
 
+class myMirror(meshGen):
+
+	def __init__(self,H,W):
+		super(myMirror, self).__init__(H,W)
+
+	def defineMirror(self):
+
+		self.Z = self.X*0+1
+
+	def getMirror(self):
+		self.defineMirror()
+
+		return self.getPlane()
+
 def nothing(x):
     pass
 
@@ -22,17 +36,14 @@ cv2.createTrackbar("P2",WINDOW_NAME,0,100000,nothing)
 cv2.createTrackbar("focus",WINDOW_NAME,600,1000,nothing)
 cv2.createTrackbar("Sx",WINDOW_NAME,100,1000,nothing)
 cv2.createTrackbar("Sy",WINDOW_NAME,100,1000,nothing)
-# cv2.createTrackbar("R_Mesh",WINDOW_NAME,0,1000,nothing)
 # cap = cv2.VideoCapture(0)
 # ret,img = cap.read()
 img = cv2.imread("chess.png")
 H,W = img.shape[:2]
 
 c1 = vcam(H=H,W=W)
-grid = meshGen(H,W)
-# src = grid.getConvexMesh(0.3)
-src = grid.getSimpleMesh()
-c1.set_tvec(0,0,1)
+grid = myMirror(H,W)
+src = grid.getMirror()
 
 while True:
 	# ret, img = cap.read()
@@ -50,7 +61,6 @@ while True:
 	k2 = cv2.getTrackbarPos("K2",WINDOW_NAME)/100000
 	p1 = cv2.getTrackbarPos("P1",WINDOW_NAME)/100000
 	p2 = cv2.getTrackbarPos("P2",WINDOW_NAME)/100000
-	# R_Mesh = cv2.getTrackbarPos("R_Mesh",WINDOW_NAME)/1000
 	c1.KpCoeff[0] = k1
 	c1.KpCoeff[1] = k2
 	c1.KpCoeff[2] = p1
@@ -58,7 +68,6 @@ while True:
 
 	c1.set_tvec(X,Y,Z)
 	c1.set_rvec(alpha,beta,gamma)
-	# src = grid.getConvexMesh(R_Mesh)
 	output = c1.applyMesh(img,src)
 	M = c1.RT
 	print("\n\n############## Camera Matrix ##################")
