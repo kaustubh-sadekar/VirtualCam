@@ -1,5 +1,9 @@
-<p align="Left">
-  <img src="VCamLogo.png>
+<p align="Center">
+  <img src="VCamLogo.png">
+</p>
+
+<p style="text-align: center;">
+  VirtualCamera
 </p>
 
 # VirtualCam
