@@ -9,6 +9,7 @@ Virtual camera is created **only using OpenCV and numpy**. It simulates a camera
 Standard books related to multi-view geometry and computer vision were refered to ensure validty of equations in the code.
 I also refered this [blog from learnopencv.com](https://www.learnopencv.com/geometry-of-image-formation/) to understand the geometry of image formation.
 
+#### An interesting application of this library can be seen in [FunMirrors project](https://github.com/kaustubh-sadekar/FunMirrors/blob/master/README.md)
 
 ## Instructions to run the GUI
 
