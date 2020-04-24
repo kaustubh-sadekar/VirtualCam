@@ -3,20 +3,6 @@ import numpy as np
 import math
 from vcam import vcam,meshGen
 
-class myMirror(meshGen):
-
-	def __init__(self,H,W):
-		super(myMirror, self).__init__(H,W)
-
-	def defineMirror(self):
-
-		self.Z = self.X*0+1
-
-	def getMirror(self):
-		self.defineMirror()
-
-		return self.getPlane()
-
 def nothing(x):
     pass
 
@@ -42,8 +28,12 @@ img = cv2.imread("chess.png")
 H,W = img.shape[:2]
 
 c1 = vcam(H=H,W=W)
-grid = myMirror(H,W)
-src = grid.getMirror()
+plane = meshGen(H,W)
+
+plane.Z = plane.X*0 + 1
+
+pts3d = plane.getPlane()
+
 
 while True:
 	# ret, img = cap.read()
@@ -68,7 +58,10 @@ while True:
 
 	c1.set_tvec(X,Y,Z)
 	c1.set_rvec(alpha,beta,gamma)
-	output = c1.applyMesh(img,src)
+	pts2d = c1.project(pts3d)
+	map_x,map_y = c1.getMaps(pts2d)
+	output = cv2.remap(img,map_x,map_y,interpolation=cv2.INTER_LINEAR)
+
 	M = c1.RT
 	print("\n\n############## Camera Matrix ##################")
 	print(M)
