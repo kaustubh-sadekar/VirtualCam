@@ -18,7 +18,8 @@ pip3 install vcam
 ```
 2. Clone the repositoy
 `git clone https://github.com/kaustubh-sadekar/VirtualCam.git`
-3. Run the GUI
+3. Run the GUI using the following command
+`python3 GUI.py`
 
 ### Camera Translation
 ![Camera-Translation](xyz.gif)
@@ -46,5 +47,4 @@ Basically the plane is a mesh of 3D points. We compute the camera projection mat
 `python3 GUI.py`
 
 ## Code files
-`GUI.py` is the file for GUI to play with camera parameters
-`vcam.py` contains two classes used in the backend of the GUI. class `vcam` is the virtual camera class and class `meshGen` is for generating different types of mesh which forms the plane in 3D. Presently simple planar grid and a convex shaped grid is defined. 
+`GUI.py` is the file for GUI to play with camera parameters.
