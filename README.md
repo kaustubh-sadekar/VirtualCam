@@ -1,5 +1,5 @@
 <p align="Left">
-  <img width=200 src="VCamLogo.png">
+  <img width=150 src="VCamLogo.png">
 </p>
 
 # VirtualCam
