@@ -11,6 +11,8 @@ I also refered this [blog from learnopencv.com](https://www.learnopencv.com/geom
 
 #### An interesting application of this library can be seen in [FunMirrors project](https://github.com/kaustubh-sadekar/FunMirrors/blob/master/README.md)
 
+[Link to the post about FunMirrors](https://www.learnopencv.com/funny-mirrors-using-opencv/)
+
 ## Instructions to run the GUI
 
 1. Install the virtual camera library using the following command
