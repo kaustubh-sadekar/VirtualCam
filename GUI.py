@@ -9,6 +9,8 @@ def nothing(x):
 WINDOW_NAME = "output"
 cv2.namedWindow(WINDOW_NAME,cv2.WINDOW_NORMAL)
 cv2.resizeWindow(WINDOW_NAME,700,700)
+
+# Creating the tracker bar for all the features
 cv2.createTrackbar("X",WINDOW_NAME,500,1000,nothing)
 cv2.createTrackbar("Y",WINDOW_NAME,500,1000,nothing)
 cv2.createTrackbar("Z",WINDOW_NAME,0,1000,nothing)
@@ -22,6 +24,7 @@ cv2.createTrackbar("P2",WINDOW_NAME,0,100000,nothing)
 cv2.createTrackbar("focus",WINDOW_NAME,600,1000,nothing)
 cv2.createTrackbar("Sx",WINDOW_NAME,100,1000,nothing)
 cv2.createTrackbar("Sy",WINDOW_NAME,100,1000,nothing)
+
 # cap = cv2.VideoCapture(0)
 # ret,img = cap.read()
 img = cv2.imread("chess.png")
